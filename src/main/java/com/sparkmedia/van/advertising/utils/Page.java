@@ -7,7 +7,8 @@ import java.util.List;
  * User: D06LH
  * Date: 12-10-19
  * Time: 下午12:28
- * To change this template use File | Settings | File Templates.
+ * Page object store the AdvertisingSite objects list and place information of particular
+ * section in the db.
  */
 public class Page<T> {
 
@@ -61,6 +62,5 @@ public class Page<T> {
     public void setCurPage(int curPage) {
         this.curPage = curPage;
     }
-
 
 }

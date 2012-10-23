@@ -19,7 +19,7 @@ import java.util.Set;
  * User: D06LH
  * Date: 12-10-17
  * Time: 下午3:31
- * Servlet that list the content of the advertising Site.
+ * Servlet list the content of the advertising Site.
  */
 public class ShowAdvertisingList extends HttpServlet {
     private IAdvertisingSitesDao advSiteDao = new AdvertisingSitesDao();
@@ -28,15 +28,15 @@ public class ShowAdvertisingList extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         AdvSiteListReqBean bean = new AdvSiteListReqBean();
+        String address = "/WEB-INF/pages/error.jsp";
         BeanUtilities.populateBean(bean, request);
         try {
             Page<AdvertisingSite> page = advSiteDao.query(bean.getCurPage(), bean.getPageSize(), bean.getKeyword());
             session.setAttribute("Page", page);
+            address = "/WEB-INF/pages/login.jsp";
         } catch (Exception e) {
-        } finally {
-            ;
+            address = "/WEB-INF/pages/error.jsp";
         }
-        String address = "/WEB-INF/index.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
     }
