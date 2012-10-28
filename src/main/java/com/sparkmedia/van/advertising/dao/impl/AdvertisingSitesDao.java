@@ -4,6 +4,10 @@ import com.sparkmedia.van.advertising.dao.*;
 import com.sparkmedia.van.advertising.entity.*;
 import com.sparkmedia.van.advertising.utils.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: D06LH
@@ -14,8 +18,28 @@ import com.sparkmedia.van.advertising.utils.*;
 public class AdvertisingSitesDao implements IAdvertisingSitesDao {
 
     @Override
-    public void insert(AdvertisingSite advSite) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void insert(AdvertisingSite advSite) throws Exception {
+        Connection conn = null;
+        try {
+            conn = DBConnectionUtils.getConnection();
+            conn.setAutoCommit(false);
+            PreparedStatement ps = conn.prepareStatement("insert into AdvSites(TypeName, ContentIds,Stat) values(?,?,?)");
+            ps.setString(1, advSite.getTypeName());
+
+            if(advSite.getContentId().size() == advSite.getContentNumber()){
+                ps.setString(2, advSite.getContentId().toString());
+            }
+
+            ps.setString(3, advSite.getStat().toString());
+            ps.executeUpdate();
+            conn.commit();
+        } catch (Exception e) {
+            conn.rollback();
+            throw e;
+        }finally{
+            if(null!=conn)
+                conn.close();
+        }
     }
 
     @Override

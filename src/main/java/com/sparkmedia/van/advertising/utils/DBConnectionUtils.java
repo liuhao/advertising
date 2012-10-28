@@ -10,7 +10,7 @@ import java.util.Properties;
  * User: D06LH
  * Date: 12-10-19
  * Time: 下午1:59
- * To change this template use File | Settings | File Templates.
+ * Create a connection with derby, create tables structure.
  */
 public class DBConnectionUtils {
 
@@ -44,9 +44,9 @@ public class DBConnectionUtils {
         } catch (Exception e) {
         }
         s.execute("CREATE TABLE AdvSites(" +
-                "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY," +
-                "TypeName VARCHAR(100) PRIMARY KEY," +
-                "ContentIds VARCHAR(500) PRIMARY KEY," +
+                "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
+                "TypeName VARCHAR(100)," +
+                "ContentIds VARCHAR(500)," +
                 "Stat INT," +
                 "UpdateDate DATE DEFAULT CURRENT_DATE)");
 
@@ -57,7 +57,7 @@ public class DBConnectionUtils {
         }
         s.execute("CREATE TABLE AdvContents(" +
                 "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
-                "Description VARCHAR(500) ," +
+                "Description VARCHAR(500)," +
                 "width INT," +
                 "height INT," +
                 "x INT," +

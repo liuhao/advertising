@@ -4,6 +4,7 @@ import com.sparkmedia.van.advertising.entity.AdvertisingSite;
 import com.sparkmedia.van.advertising.utils.Page;
 
 import java.awt.print.Pageable;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public interface IAdvertisingSitesDao {
-    public void insert(AdvertisingSite advSite);
+    public void insert(AdvertisingSite advSite) throws Exception;
     public void delete(AdvertisingSite advSite);
     public int deleteAll();
     public Page<AdvertisingSite> query(int curPage, int pageSize, String keyword) throws Exception;
