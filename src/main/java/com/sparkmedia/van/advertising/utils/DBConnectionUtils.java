@@ -40,29 +40,25 @@ public class DBConnectionUtils {
 
         //drop AdvSites table and create
         try {
-            s.execute("DROP TABLE AdvSites");
+            s.execute("DROP TABLE AdSites");
         } catch (Exception e) {
         }
-        s.execute("CREATE TABLE AdvSites(" +
+        s.execute("CREATE TABLE AdSites(" +
                 "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
-                "TypeName VARCHAR(100)," +
-                "ContentIds VARCHAR(500)," +
+                "TypeId LONG," +
+                "ContentUris VARCHAR(500)," +
                 "Stat INT," +
                 "UpdateDate DATE DEFAULT CURRENT_DATE)");
 
-        //drop AdvContents table and create
+        //drop AdSiteTypes table and create
         try {
-            s.execute("DROP TABLE AdvContents");
+            s.execute("DROP TABLE AdSiteTypes");
         } catch (Exception e) {
         }
-        s.execute("CREATE TABLE AdvContents(" +
+        s.execute("CREATE TABLE AdSiteTypes(" +
                 "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
-                "Description VARCHAR(500)," +
-                "width INT," +
-                "height INT," +
-                "x INT," +
-                "y INT," +
-                "Uri VARCHAR(512)");
+                "TypeName VARCHAR(100)," +
+                "ContentInfo VARCHAR(512)");
 
         //drop user table and create
         try {

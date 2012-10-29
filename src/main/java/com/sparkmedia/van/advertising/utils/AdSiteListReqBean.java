@@ -5,7 +5,7 @@ package com.sparkmedia.van.advertising.utils;
  * User: D06LH
  * Date: 12-10-22
  * Time: 下午3:29
- * To change this template use File | Settings | File Templates.
+ * this bean class handle request data, then send them to respond jsp page.
  */
 public class AdSiteListReqBean {
     private int curPage = 1;

@@ -1,5 +1,6 @@
 package com.sparkmedia.van.advertising.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * Time: 下午1:50
  * To change this template use File | Settings | File Templates.
  */
-public class AdSiteType {
+public class AdSiteType implements Serializable {
     private long id;
     private String typeName;
     private List<AdContent> advContentList;

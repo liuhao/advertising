@@ -18,7 +18,7 @@ import java.io.IOException;
  * User: D06LH
  * Date: 12-10-17
  * Time: 下午3:31
- * Servlet list the content of the advertising Site.
+ * Servlet list the recorder of the advertising site.
  */
 public class ShowAdList extends HttpServlet {
     private IAdSitesDao advSiteDao = new AdSitesDao();
