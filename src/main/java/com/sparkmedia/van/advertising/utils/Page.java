@@ -7,7 +7,7 @@ import java.util.List;
  * User: D06LH
  * Date: 12-10-19
  * Time: 下午12:28
- * Page object store the AdvertisingSite objects list and place information of particular
+ * Page object store the AdSite objects list and place information of particular
  * section in the db.
  */
 public class Page<T> {

@@ -6,30 +6,25 @@ import com.sparkmedia.van.advertising.utils.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * Created with IntelliJ IDEA.
  * User: D06LH
  * Date: 12-10-19
  * Time: 下午1:56
- * To change this template use File | Settings | File Templates.
+ * Add, del, update advertising site recorder,
  */
-public class AdvertisingSitesDao implements IAdvertisingSitesDao {
+public class AdSitesDao implements IAdSitesDao {
 
     @Override
-    public void insert(AdvertisingSite advSite) throws Exception {
+    public void insert(AdSite advSite) throws Exception {
         Connection conn = null;
         try {
             conn = DBConnectionUtils.getConnection();
             conn.setAutoCommit(false);
-            PreparedStatement ps = conn.prepareStatement("insert into AdvSites(TypeName, ContentIds,Stat) values(?,?,?)");
-            ps.setString(1, advSite.getTypeName());
-
-            if(advSite.getContentId().size() == advSite.getContentNumber()){
-                ps.setString(2, advSite.getContentId().toString());
-            }
-
+            PreparedStatement ps = conn.prepareStatement("insert into AdvSites(TypeName, ContentIds, Stat) values(?,?,?)");
+            ps.setString(1, String.valueOf(advSite.getTypeId()));
+            ps.setString(2, advSite.getContentUri().toString());
             ps.setString(3, advSite.getStat().toString());
             ps.executeUpdate();
             conn.commit();
@@ -43,7 +38,7 @@ public class AdvertisingSitesDao implements IAdvertisingSitesDao {
     }
 
     @Override
-    public void delete(AdvertisingSite advSite) {
+    public void delete(AdSite advSite) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -53,12 +48,12 @@ public class AdvertisingSitesDao implements IAdvertisingSitesDao {
     }
 
     @Override
-    public Page<AdvertisingSite> query(int curPage, int pageSize, String keyword) throws Exception {
+    public Page<AdSite> query(int curPage, int pageSize, String keyword) throws Exception {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public AdvertisingSite get(long advSiteId) {
+    public AdSite get(long advSiteId) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

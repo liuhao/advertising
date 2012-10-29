@@ -1,8 +1,8 @@
 package com.sparkmedia.van.advertising.action;
 
-import com.sparkmedia.van.advertising.dao.IAdvertisingSitesDao;
-import com.sparkmedia.van.advertising.dao.impl.AdvertisingSitesDao;
-import com.sparkmedia.van.advertising.entity.AdvertisingSite;
+import com.sparkmedia.van.advertising.dao.IAdSitesDao;
+import com.sparkmedia.van.advertising.dao.impl.AdSitesDao;
+import com.sparkmedia.van.advertising.entity.AdSite;
 import com.sparkmedia.van.advertising.utils.*;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,17 +20,17 @@ import java.util.Set;
  * Time: 下午3:31
  * Servlet list the content of the advertising Site.
  */
-public class ShowAdvertisingList extends HttpServlet {
-    private IAdvertisingSitesDao advSiteDao = new AdvertisingSitesDao();
+public class ShowAdList extends HttpServlet {
+    private IAdSitesDao advSiteDao = new AdSitesDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        AdvSiteListReqBean bean = new AdvSiteListReqBean();
+        AdSiteListReqBean bean = new AdSiteListReqBean();
         String address = "/WEB-INF/pages/error.jsp";
         BeanUtilities.populateBean(bean, request);
         try {
-            Page<AdvertisingSite> page = advSiteDao.query(bean.getCurPage(), bean.getPageSize(), bean.getKeyword());
+            Page<AdSite> page = advSiteDao.query(bean.getCurPage(), bean.getPageSize(), bean.getKeyword());
             session.setAttribute("Page", page);
             address = "/WEB-INF/pages/login.jsp";
         } catch (Exception e) {

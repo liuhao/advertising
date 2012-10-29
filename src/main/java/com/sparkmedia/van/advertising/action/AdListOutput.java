@@ -7,5 +7,5 @@ package com.sparkmedia.van.advertising.action;
  * Time: 下午3:36
  * To change this template use File | Settings | File Templates.
  */
-public class AdvertisingListOutput {
+public class AdListOutput {
 }

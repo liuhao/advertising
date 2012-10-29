@@ -7,7 +7,7 @@ package com.sparkmedia.van.advertising.utils;
  * Time: 下午3:29
  * To change this template use File | Settings | File Templates.
  */
-public class AdvSiteListReqBean {
+public class AdSiteListReqBean {
     private int curPage = 1;
     private int pageSize = 20;
     private String keyword = "No keyword specified";

@@ -13,11 +13,10 @@ import java.util.List;
  * Advertising Site include a group of AdvertisingContents,
  * it generally represent a complete package for the customers.
  */
-public class AdvertisingSite implements Serializable {
+public class AdSite implements Serializable {
     private long id;
-    private String typeName;
-    private int contentNumber;
-    private List<Long> contentId;
+    private long typeId;
+    private List<String> contentUri;
     private Enum stat;
     private Date updateDate;
 
@@ -31,28 +30,20 @@ public class AdvertisingSite implements Serializable {
         this.id = id;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public long getTypeId() {
+        return typeId;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setTypeId(long typeId) {
+        this.typeId = typeId;
     }
 
-    public int getContentNumber() {
-        return contentNumber;
+    public List<String> getContentUri() {
+        return contentUri;
     }
 
-    public void setGetContentNumber(int contentNumber) {
-        this.contentNumber = contentNumber;
-    }
-
-    public List<Long> getContentId() {
-        return contentId;
-    }
-
-    public void setContentId(List<Long> contentId) {
-        this.contentId = contentId;
+    public void setContentUri(List<String> contentUri) {
+        this.contentUri = contentUri;
     }
 
     public Enum getStat() {
