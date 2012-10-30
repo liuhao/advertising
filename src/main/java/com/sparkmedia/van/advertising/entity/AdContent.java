@@ -9,10 +9,10 @@ package com.sparkmedia.van.advertising.entity;
  * for example: a picture, a video clip or a flash file.
  */
 public class AdContent {
-    private int x;
-    private int y;
-    private int w;
-    private int h;
+    private Integer x;
+    private Integer y;
+    private Integer w;
+    private Integer h;
     private String uri;
 
     public String getUri() {
@@ -53,5 +53,13 @@ public class AdContent {
 
     public void setH(int h) {
         this.h = h;
+    }
+
+    public String objToString() {
+        return (x.toString() + "," + y.toString() + "," + w.toString() + "," + h.toString());
+    }
+
+    public AdContent stringToObj(String ObjInfo) {
+        return this;
     }
 }

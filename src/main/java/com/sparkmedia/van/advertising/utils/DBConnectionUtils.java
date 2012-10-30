@@ -45,7 +45,7 @@ public class DBConnectionUtils {
         }
         s.execute("CREATE TABLE AdSites(" +
                 "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
-                "TypeId LONG," +
+                "TypeId BIGINT," +
                 "ContentUris VARCHAR(500)," +
                 "Stat INT," +
                 "UpdateDate DATE DEFAULT CURRENT_DATE)");

@@ -13,7 +13,7 @@ import java.util.List;
 public class AdSiteType implements Serializable {
     private long id;
     private String typeName;
-    private List<AdContent> advContentList;
+    private List<AdContent> adContentList;
 
     public long getId() {
         return id;
@@ -31,11 +31,19 @@ public class AdSiteType implements Serializable {
         this.typeName = typeName;
     }
 
-    public List<AdContent> getAdvContentList() {
-        return advContentList;
+    public List<AdContent> getAdContentList() {
+        return adContentList;
     }
 
-    public void setAdvContentList(List<AdContent> advContentList) {
-        this.advContentList = advContentList;
+    public void setAdvContentList(List<AdContent> adContentList) {
+        this.adContentList = adContentList;
+    }
+
+    public void objToString() {
+        ;
+    }
+
+    public AdSiteType stringToObj() {
+        return this;
     }
 }
