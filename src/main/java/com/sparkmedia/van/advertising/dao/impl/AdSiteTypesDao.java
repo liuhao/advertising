@@ -7,21 +7,22 @@ import com.sparkmedia.van.advertising.utils.DBConnectionUtils;
 import com.sparkmedia.van.advertising.utils.Page;
 
 import org.apache.commons.lang.StringUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Created with IntelliJ IDEA.
  * User: D06LH
  * Date: 12-10-19
  * Time: 下午2:15
- * Add,del,update advertising site type.
- * different site has different layout, for example, youtube ad site has two spot to place advertising:
- * left window and right window.
+ * Transfer AdSiteType obj to json obj, then use json obj handle database recorder.
  */
 public class AdSiteTypesDao implements IAdSiteTypesDao {
 
@@ -31,16 +32,10 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
         try {
             conn = DBConnectionUtils.getConnection();
             conn.setAutoCommit(false);
-            PreparedStatement ps = conn.prepareStatement("insert into AdvSitesType(TypeName, SpotInfo) values(?,?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO AdSiteTypeTable (typeName, adContents) VALUES (?,?)");
             ps.setString(1, adSiteType.getTypeName());
-
-            List<AdContent> advSpotList = adSiteType.getAdContentList();
-            String sep = ";";
-            StringBuffer result =  new StringBuffer() ;
-            for (AdContent it : advSpotList ) {
-                result.append(sep==null?"":sep);
-            }
-            ps.setString(2, result.toString());
+            Gson gson = new Gson();
+            ps.setString(2, gson.toJson(adSiteType.getAdContents()));
             ps.executeUpdate();
             conn.commit();
         } catch (Exception e) {
@@ -53,43 +48,68 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
     }
 
     @Override
-    public void delete(long advSiteTypeId) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public int delete(long adSiteTypeId) throws Exception {
+        Connection conn = null;
+        int count = 0;
+        try {
+            conn = DBConnectionUtils.getConnection();
+            conn.setAutoCommit(false);
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM AdSiteTypeTable WHERE id in ("+adSiteTypeId+")");
+            count = ps.executeUpdate();
+            conn.commit();
+        } catch (Exception e) {
+            conn.rollback();
+            throw e;
+        }finally{
+            if(null!=conn)
+                conn.close();
+        }
+        return count;
     }
 
     @Override
-    public AdSiteType get(long advSiteTypeId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public AdSiteType get(long adSiteTypeId) throws Exception {
+        Connection conn = null;
+        AdSiteType adSiteType = null;
+        try {
+            conn = DBConnectionUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM AdSiteTypeTable WHERE id=?");
+            ps.setLong(1, adSiteTypeId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                adSiteType = new AdSiteType();
+                adSiteType.setTypeName(rs.getString("typeName"));
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<List<AdContent>>(){}.getType();
+                List<AdContent> contents = gson.fromJson(rs.getString("adContents"), collectionType);
+                adSiteType.setAdContents(contents);
+            }
+            return adSiteType;
+        } catch (Exception e) {
+            throw new Exception(e);
+        }finally{
+            if(null!=conn)
+                conn.close();
+        }
     }
 
     @Override
-    public Page<AdSiteType> query(int curPage, int pageSize, String keyword) throws Exception {
+    public Page<AdSiteType> query(int curPage, int pageSize) throws Exception {
         Connection conn = null;
         Page<AdSiteType> page = new Page<AdSiteType>();
         try {
             conn = DBConnectionUtils.getConnection();
-            int counter = 0;
-            StringBuffer whereSql = new StringBuffer(" 1=1 ");
-            if(StringUtils.isNotBlank(keyword)){
-                whereSql.append(" and TypeID like ? ");
-            }
-            PreparedStatement ps = conn.prepareStatement("select count(*) from AdSiteType where "+whereSql.toString());
-            if(StringUtils.isNotBlank(keyword)){
-                ps.setString(1, "%"+keyword+"%");
-            }
+            PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM AdSiteTypeTable");
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                page.setTotalRecords(rs.getInt(1),pageSize);
+                page.setTotalRecords(rs.getInt(1), pageSize);
                 if(page.getTotalRecords()==0){
                     return page;
                 }
             }
-            ps = conn.prepareStatement("SELECT * FROM icon WHERE "+whereSql.toString()+" ORDER BY update_date DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-            if(StringUtils.isNotBlank(keyword)){
-                ps.setString(++counter, "%"+keyword+"%");
-            }
-            ps.setInt(++counter, (curPage-1)*pageSize);
-            ps.setInt(++counter, pageSize);
+            ps = conn.prepareStatement("SELECT * FROM AdSiteTypeTable ORDER BY id DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps.setInt(1, (curPage-1)*pageSize);
+            ps.setInt(2, pageSize);
             rs = ps.executeQuery();
 
             // transfer Result Set to Result List
@@ -97,10 +117,14 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
             page.setResults(results);
             page.setCurPage(curPage);
             AdSiteType adSiteType;
+            Gson gson = new Gson();
+            Type collectionType = new TypeToken<List<AdContent>>(){}.getType();
             while(rs.next()){
                 adSiteType = new AdSiteType();
                 adSiteType.setId(rs.getLong("id"));
                 adSiteType.setTypeName(rs.getString("typeName"));
+                List<AdContent> contents = gson.fromJson(rs.getString("adContents"), collectionType);
+                adSiteType.setAdContents(contents);
                 results.add(adSiteType);
             }
         } catch (Exception e) {

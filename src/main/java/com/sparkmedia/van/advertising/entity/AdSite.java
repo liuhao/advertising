@@ -1,8 +1,6 @@
 package com.sparkmedia.van.advertising.entity;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -13,11 +11,11 @@ import java.util.List;
  * Advertising Site include a group of AdvertisingContents,
  * it generally represent a complete package for the customers.
  */
-public class AdSite implements Serializable {
+public class AdSite {
     private long id;
     private long typeId;
-    private List<String> contentUri;
-    private Enum stat;
+    private List<AdContent> adContents;
+    private int stat;
     private Date updateDate;
 
     private static final long serialVersionUID = 7312438658961498567L;
@@ -38,19 +36,19 @@ public class AdSite implements Serializable {
         this.typeId = typeId;
     }
 
-    public List<String> getContentUri() {
-        return contentUri;
+    public List<AdContent> getAdContents() {
+        return adContents;
     }
 
-    public void setContentUri(List<String> contentUri) {
-        this.contentUri = contentUri;
+    public void setAdContents(List<AdContent> adContents) {
+        this.adContents = adContents;
     }
 
-    public Enum getStat() {
+    public int getStat() {
         return stat;
     }
 
-    public void setStat(Enum stat) {
+    public void setStat(int stat) {
         this.stat = stat;
     }
 

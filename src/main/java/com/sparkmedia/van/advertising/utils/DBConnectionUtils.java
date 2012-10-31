@@ -40,37 +40,37 @@ public class DBConnectionUtils {
 
         //drop AdvSites table and create
         try {
-            s.execute("DROP TABLE AdSites");
+            s.execute("DROP TABLE AdSiteTable");
         } catch (Exception e) {
         }
-        s.execute("CREATE TABLE AdSites(" +
-                "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
-                "TypeId BIGINT," +
-                "ContentUris VARCHAR(500)," +
-                "Stat INT," +
-                "UpdateDate DATE DEFAULT CURRENT_DATE)");
+        s.execute("CREATE TABLE AdSiteTable(" +
+                "id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
+                "typeId BIGINT," +
+                "adContents VARCHAR(500)," +
+                "stat INT," +
+                "updateDate DATE DEFAULT CURRENT_DATE)");
 
         //drop AdSiteTypes table and create
         try {
-            s.execute("DROP TABLE AdSiteTypes");
+            s.execute("DROP TABLE AdSiteTypeTable");
         } catch (Exception e) {
         }
-        s.execute("CREATE TABLE AdSiteTypes(" +
-                "Id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
-                "TypeName VARCHAR(100)," +
-                "ContentInfo VARCHAR(512)");
+        s.execute("CREATE TABLE AdSiteTypeTable(" +
+                "id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
+                "typeName VARCHAR(100)," +
+                "adContents VARCHAR(512)");
 
         //drop user table and create
         try {
-            s.execute("DROP TABLE UserAdmin");
+            s.execute("DROP TABLE UserAdminTable");
         } catch (Exception e) {
         }
-        s.execute("CREATE TABLE UserAdmin(" +
-                "Id INT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
-                "UserName VARCHAR(30)," +
-                "Password VARCHAR(32)," +
-                "Admin INT)");
+        s.execute("CREATE TABLE UserAdminTable(" +
+                "id INT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
+                "userName VARCHAR(30)," +
+                "password VARCHAR(32)," +
+                "adminMark INT)");
         //init administrator account
-        s.execute("INSERT INTO UserAdmin(UserName,Password,Admin) VALUES('admin','admin',1)");
+        s.execute("INSERT INTO UserAdminTable (userName,password,adminMark) VALUES ('admin','admin',1)");
     }
 }

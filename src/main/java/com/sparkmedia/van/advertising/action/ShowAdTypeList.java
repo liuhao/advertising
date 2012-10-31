@@ -32,9 +32,9 @@ public class ShowAdTypeList extends HttpServlet {
         String address = "/WEB-INF/pages/error.jsp";
         BeanUtilities.populateBean(bean, request);
         try {
-            Page<AdSiteType> page = adSiteTypesDao.query(bean.getCurPage(), bean.getPageSize(), bean.getKeyword());
+            Page<AdSiteType> page = adSiteTypesDao.query(bean.getCurPage(), bean.getPageSize());
             session.setAttribute("Page", page);
-            address = "/WEB-INF/pages/TypeSetting.jsp";
+            address = "/WEB-INF/pages/typeSetting.jsp";
         } catch (Exception e) {
             address = "/WEB-INF/pages/error.jsp";
         }
