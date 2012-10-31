@@ -28,12 +28,15 @@ public class ShowAdTypeList extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Page<AdSiteType> page = (Page<AdSiteType>) session.getAttribute("Page");
         AdSiteListReqBean bean = new AdSiteListReqBean();
         String address = "/WEB-INF/pages/error.jsp";
         BeanUtilities.populateBean(bean, request);
         try {
-            Page<AdSiteType> page = adSiteTypesDao.query(bean.getCurPage(), bean.getPageSize());
-            session.setAttribute("Page", page);
+            if (page == null) {
+                page = adSiteTypesDao.query(bean.getCurPage(), bean.getPageSize());
+                session.setAttribute("Page", page);
+            }
             address = "/WEB-INF/pages/typeSetting.jsp";
         } catch (Exception e) {
             address = "/WEB-INF/pages/error.jsp";

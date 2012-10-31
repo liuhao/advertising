@@ -46,7 +46,7 @@ public class DBConnectionUtils {
         s.execute("CREATE TABLE AdSiteTable(" +
                 "id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
                 "typeId BIGINT," +
-                "adContents VARCHAR(500)," +
+                "adContents VARCHAR(512)," +
                 "stat INT," +
                 "updateDate DATE DEFAULT CURRENT_DATE)");
 
@@ -58,8 +58,7 @@ public class DBConnectionUtils {
         s.execute("CREATE TABLE AdSiteTypeTable(" +
                 "id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY," +
                 "typeName VARCHAR(100)," +
-                "adContents VARCHAR(512)");
-
+                "adContents VARCHAR(512))");
         //drop user table and create
         try {
             s.execute("DROP TABLE UserAdminTable");
