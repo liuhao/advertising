@@ -6,10 +6,8 @@ import com.sparkmedia.van.advertising.entity.AdSiteType;
 import com.sparkmedia.van.advertising.utils.DBConnectionUtils;
 import com.sparkmedia.van.advertising.utils.Page;
 
-import org.apache.commons.lang.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +37,7 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
             ps.executeUpdate();
             conn.commit();
         } catch (Exception e) {
+            System.out.println("adSiteType INSERT is false");
             conn.rollback();
             throw e;
         }finally{
@@ -102,11 +101,13 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
             PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM AdSiteTypeTable");
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
+                System.out.println("rs.next() is ture");
                 page.setTotalRecords(rs.getInt(1), pageSize);
                 if(page.getTotalRecords()==0){
                     return page;
                 }
             }
+            System.out.println("rs.next() is false");
             ps = conn.prepareStatement("SELECT * FROM AdSiteTypeTable ORDER BY id DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, (curPage-1)*pageSize);
             ps.setInt(2, pageSize);

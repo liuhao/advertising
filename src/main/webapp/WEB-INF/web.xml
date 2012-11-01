@@ -7,9 +7,17 @@
         <servlet-name>ShowAdTypeList</servlet-name>
         <servlet-class>com.sparkmedia.van.advertising.action.ShowAdTypeList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAdTypeRecorder</servlet-name>
+        <servlet-class>com.sparkmedia.van.advertising.action.AddAdTypeRecorder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowAdTypeList</servlet-name>
         <url-pattern>/show_ad_type</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAdTypeRecorder</servlet-name>
+        <url-pattern>/add_adtyep_rec</url-pattern>
     </servlet-mapping>
     <display-name>Sparkmedia Advertising Operating Server</display-name>
 </web-app>

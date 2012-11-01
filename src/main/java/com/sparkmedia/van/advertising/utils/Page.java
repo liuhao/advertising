@@ -34,12 +34,12 @@ public class Page<T> {
         return totalRecords;
     }
 
-    public void setTotalRecords(int totalRecords,int pageSize) {
+    public void setTotalRecords(int totalRecords, int pageSize) {
         this.totalRecords = totalRecords;
         if(totalRecords==0){
             this.pageCount = 0;
         }else{
-            this.pageCount = (totalRecords-1)/pageSize+1;
+            this.pageCount = ((totalRecords-1)/pageSize) + 1;
         }
     }
 
