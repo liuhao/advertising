@@ -17,7 +17,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddAdTypeRecorder</servlet-name>
-        <url-pattern>/add_adtyep_rec</url-pattern>
+        <url-pattern>/add_adtype_rec</url-pattern>
     </servlet-mapping>
     <display-name>Sparkmedia Advertising Operating Server</display-name>
 </web-app>

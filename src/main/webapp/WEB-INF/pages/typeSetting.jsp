@@ -12,8 +12,14 @@
 </head>
 <body>
 <jsp:useBean id="Page" type="com.sparkmedia.van.advertising.utils.Page" scope="session" />
-page.totalRecordes = <jsp:getProperty name="Page" property="totalRecords" /> .
-page.totalRecordes = <jsp:getProperty name="Page" property="curPage" /> .
-page.totalRecordes = <jsp:getProperty name="Page" property="pageCount" /> .
+page.totalRecordes = ${Page.totalRecords}
+page.curPage = ${Page.curPage}
+page.pageCount = ${Page.pageCount}
+<table>
+    <tr>
+        <td>${Page.results[0].id}</td>
+        <td>${Page.results[0].adContents[1].name}</td>
+    </tr>
+</table>
 </body>
 </html>
