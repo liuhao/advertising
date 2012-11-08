@@ -5,11 +5,15 @@
          version="2.5">
     <servlet>
         <servlet-name>ShowAdTypeList</servlet-name>
-        <servlet-class>com.sparkmedia.van.advertising.action.ShowAdTypeList</servlet-class>
+        <servlet-class>com.sparkmedia.van.advertising.action.ShowAdTypesList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddAdTypeRecorder</servlet-name>
         <servlet-class>com.sparkmedia.van.advertising.action.AddAdTypeRecorder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FileUpload</servlet-name>
+        <servlet-class>com.sparkmedia.van.advertising.action.FileUpload</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShowAdTypeList</servlet-name>
@@ -18,6 +22,10 @@
     <servlet-mapping>
         <servlet-name>AddAdTypeRecorder</servlet-name>
         <url-pattern>/add_adtype_rec</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileUpload</servlet-name>
+        <url-pattern>/file_upload</url-pattern>
     </servlet-mapping>
     <display-name>Sparkmedia Advertising Operating Server</display-name>
 </web-app>
