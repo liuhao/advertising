@@ -11,6 +11,7 @@
     <title></title>
 </head>
 <body>
+
 <form action="/file_upload" method="post" enctype="multipart/form-data">
     <p><label for="form-picture">A:</label><input type="file" name="A" size="28" id="pictureA"/></p>
     <p><label for="form-picture">B:</label><input type="file" name="B" size="28" id="pictureB"/></p>
