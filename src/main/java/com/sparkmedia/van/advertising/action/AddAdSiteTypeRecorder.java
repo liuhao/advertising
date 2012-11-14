@@ -27,7 +27,7 @@ import java.util.List;
  * Time: 下午5:12
  * Add a AdSiteType recorder to table.
  */
-public class AddAdTypeRecorder extends HttpServlet {
+public class AddAdSiteTypeRecorder extends HttpServlet {
     private IAdSiteTypesDao adSiteTypesDao = new AdSiteTypesDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

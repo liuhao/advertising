@@ -3,14 +3,13 @@ package com.sparkmedia.van.advertising.utils;
 /**
  * Created with IntelliJ IDEA.
  * User: D06LH
- * Date: 12-10-22
- * Time: 下午3:29
- * this bean class handle request data, then send them to respond jsp page.
+ * Date: 12-11-14
+ * Time: 上午11:45
+ * To change this template use File | Settings | File Templates.
  */
-public class AdSiteListReqBean {
+public class AdSiteTypeListReqBean {
     private int curPage = 1;
     private int pageSize = 20;
-    private String typeName = "unknown";
     private String keyword = "No keyword specified";
 
     public int getCurPage() {
@@ -27,14 +26,6 @@ public class AdSiteListReqBean {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-    }
-
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
     }
 
     public String getKeyword() {

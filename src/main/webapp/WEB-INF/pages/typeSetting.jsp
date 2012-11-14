@@ -14,9 +14,10 @@
 </head>
 <body>
 
-<jsp:useBean id="Page" type="com.sparkmedia.van.advertising.utils.Page" scope="session"/>
-
 <%--
+<jsp:useBean id="Page" type="com.sparkmedia.van.advertising.utils.Page" scope="session"/>
+--%>
+
 page.totalRecordes = ${Page.totalRecords}
 page.curPage = ${Page.curPage}
 page.pageCount = ${Page.pageCount}
@@ -26,8 +27,9 @@ page.pageCount = ${Page.pageCount}
     <td>${Page.results[0].adContents[1].name}</td>
 </tr>
 </table>
---%>
 
+
+<%--
 <table>
     <tr>
         <td>id</td>
@@ -42,5 +44,7 @@ page.pageCount = ${Page.pageCount}
 
     %>
 </table>
+--%>
+
 </body>
 </html>
