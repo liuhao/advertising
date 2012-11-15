@@ -1,23 +1,20 @@
 package com.sparkmedia.van.advertising.action;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sparkmedia.van.advertising.dao.IAdSiteTypesDao;
 import com.sparkmedia.van.advertising.dao.impl.AdSiteTypesDao;
 import com.sparkmedia.van.advertising.entity.AdContent;
 import com.sparkmedia.van.advertising.entity.AdSiteType;
-import com.sparkmedia.van.advertising.utils.AdSiteListReqBean;
 import com.sparkmedia.van.advertising.utils.BeanUtilities;
-import com.sparkmedia.van.advertising.utils.Page;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -27,11 +24,12 @@ import java.util.List;
  * Time: 下午5:12
  * Add a AdSiteType recorder to table.
  */
-public class AddAdSiteTypeRecorder extends HttpServlet {
+public class AddAdSiteType extends HttpServlet {
     private IAdSiteTypesDao adSiteTypesDao = new AdSiteTypesDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         AdContent adContentA = new AdContent();
         adContentA.setName("Left");
         adContentA.setDescription("This picture show in the left of the window");
@@ -57,11 +55,17 @@ public class AddAdSiteTypeRecorder extends HttpServlet {
         adContents.add(adContentA);
         adContents.add(adContentB);
         adContents.add(adContentC);
-        AdSiteType adSiteType = new AdSiteType();
-        adSiteType.setTypeName("YouTube AdSite");
-        adSiteType.setAdContents(adContents);
+        */
+
+        AddAdSiteTypeFormBean beanShow = new AddAdSiteTypeFormBean();
+        BeanUtilities.populateBean(beanShow, request);
         Gson gson = new Gson();
-        String output = gson.toJson(adSiteType.getAdContents());
+        Type collectionType = new TypeToken<List<AdContent>>(){}.getType();
+        List<AdContent> contents = gson.fromJson(beanShow.getAdContents(), collectionType);
+
+        AdSiteType adSiteType = new AdSiteType();
+        adSiteType.setTypeName(beanShow.getTypeName());
+        adSiteType.setAdContents(contents);
 
         try {
             adSiteTypesDao.insert(adSiteType);
@@ -75,7 +79,7 @@ public class AddAdSiteTypeRecorder extends HttpServlet {
                 "<HTML>\n" +
                 "<HEAD><TITLE>Add a AdType Recorder</TITLE></HEAD>\n" +
                 "<BODY BGCOLOR=\"#FDF5E6\">\n" +
-                "<H1>" + output + "</H1>\n" +
+                "<H1></H1>\n" +
                 "</BODY></HTML>");
     }
 }

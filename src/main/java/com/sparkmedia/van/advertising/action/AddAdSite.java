@@ -17,7 +17,7 @@ import java.io.IOException;
  * Time: 上午10:12
  * Add AdSite recorder to table.
  */
-public class AddAdSiteRecorder extends HttpServlet {
+public class AddAdSite extends HttpServlet {
     private IAdSitesDao adSiteTypesDao = new AdSitesDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -1,4 +1,4 @@
-package com.sparkmedia.van.advertising.utils;
+package com.sparkmedia.van.advertising.action;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,11 +7,10 @@ package com.sparkmedia.van.advertising.utils;
  * Time: 下午3:29
  * this bean class handle request data, then send them to respond jsp page.
  */
-public class AdSiteListReqBean {
+public class ShowAdSitesFormBean {
     private int curPage = 1;
     private int pageSize = 20;
-    private String typeName = "unknown";
-    private String keyword = "No keyword specified";
+    private long typeId = 0;
 
     public int getCurPage() {
         return curPage;
@@ -29,19 +28,11 @@ public class AdSiteListReqBean {
         this.pageSize = pageSize;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public long getTypeId() {
+        return typeId;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
-
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
+    public void setTypeId(long typeId) {
+        this.typeId = typeId;
     }
 }

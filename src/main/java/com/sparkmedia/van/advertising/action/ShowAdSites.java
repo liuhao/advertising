@@ -20,21 +20,21 @@ import java.io.IOException;
  * Time: 下午3:31
  * Servlet list the recorder of the advertising site.
  */
-public class ShowAdSitesList extends HttpServlet {
+public class ShowAdSites extends HttpServlet {
     private IAdSitesDao advSiteDao = new AdSitesDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        AdSiteListReqBean bean = new AdSiteListReqBean();
-        String address = "/WEB-INF/pages/error.jsp";
-        BeanUtilities.populateBean(bean, request);
+        ShowAdSitesFormBean beanShow = new ShowAdSitesFormBean();
+        BeanUtilities.populateBean(beanShow, request);
+        String address;
         try {
-            Page<AdSite> page = advSiteDao.query(bean.getCurPage(), bean.getPageSize(), bean.getKeyword());
+            Page<AdSite> page = advSiteDao.query(beanShow.getCurPage(), beanShow.getPageSize(), beanShow.getTypeId());
             session.setAttribute("Page", page);
-            address = "/WEB-INF/pages/login.jsp";
+            address = "/WEB-INF/pages/AdSites.jsp";
         } catch (Exception e) {
-            address = "/WEB-INF/pages/error.jsp";
+            address = "/WEB-INF/pages/Error.jsp";
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);

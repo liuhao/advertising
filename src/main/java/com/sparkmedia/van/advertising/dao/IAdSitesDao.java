@@ -14,5 +14,5 @@ public interface IAdSitesDao {
     public void insert(AdSite advSite) throws Exception;
     public int delete(long adSiteId) throws Exception;
     public AdSite get(long adSiteId) throws Exception;
-    public Page<AdSite> query(int curPage, int pageSize, String keyword) throws Exception;
+    public Page<AdSite> query(int curPage, int pageSize, long typeId) throws Exception;
 }
