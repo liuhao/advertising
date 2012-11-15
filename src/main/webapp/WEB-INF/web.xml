@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
     <servlet>
-        <servlet-name>ShowAdTypeList</servlet-name>
+        <servlet-name>ShowAdTypes</servlet-name>
         <servlet-class>com.sparkmedia.van.advertising.action.ShowAdSiteTypes</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddAdTypeRecorder</servlet-name>
+        <servlet-name>AddAdType</servlet-name>
         <servlet-class>com.sparkmedia.van.advertising.action.AddAdSiteType</servlet-class>
     </servlet>
     <servlet>
@@ -16,11 +16,11 @@
         <servlet-class>com.sparkmedia.van.advertising.action.FileUpload</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ShowAdTypeList</servlet-name>
+        <servlet-name>ShowAdTypes</servlet-name>
         <url-pattern>/show_ad_type</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddAdTypeRecorder</servlet-name>
+        <servlet-name>AddAdType</servlet-name>
         <url-pattern>/add_adtype_rec</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -28,4 +28,7 @@
         <url-pattern>/file_upload</url-pattern>
     </servlet-mapping>
     <display-name>Sparkmedia Advertising Operating Server</display-name>
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
