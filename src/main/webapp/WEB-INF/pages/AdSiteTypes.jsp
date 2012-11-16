@@ -83,7 +83,7 @@
 <div id="dialog" class="web_dialog">
     <table style="width: 100%; border: 0;" cellpadding="3" cellspacing="0">
         <tr>
-            <td class="web_dialog_title">Online Survey</td>
+            <td class="web_dialog_title">Add New AdSite Recorder</td>
             <td class="web_dialog_title align_right">
                 <a href="#" id="btnClose">Close</a>
             </td>
