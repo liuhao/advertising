@@ -8,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title> AdSiteType List </title>
@@ -78,7 +79,29 @@
 <input type="button" id="btnShowModal" value="Modal Dialog"/>
 <br/><br/>
 
-<div id="output"></div>
+<div id="list">
+    <table>
+        <c:forEach var="item" items="${Page.results}">
+            <tr>
+                <td>${item.id}</td>
+                <td>
+                    <table>
+                        <c:forEach var="content" items="${item.adContents}">
+                            <tr>
+                                <td>x:${content.x}</td>
+                                <td>y:${content.y}</td>
+                            </tr>
+                            <tr>
+                                <td>w:${content.w}</td>
+                                <td>h:${content.h}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 <div id="overlay" class="web_dialog_overlay"></div>
 <div id="dialog" class="web_dialog">
     <table style="width: 100%; border: 0;" cellpadding="3" cellspacing="0">
