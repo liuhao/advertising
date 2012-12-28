@@ -1,5 +1,3 @@
-<%@ page import="com.sparkmedia.van.advertising.entity.AdSiteType" %>
-<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: D06LH
@@ -209,7 +207,7 @@
 page.totalRecordes = ${Page.totalRecords}
 page.curPage = ${Page.curPage}
 page.pageCount = ${Page.pageCount}
-<table>
+<table border="1">
     <tr>
         <td>${Page.results[0].id}</td>
         <td>${Page.results[0].adContents[1].name}</td>

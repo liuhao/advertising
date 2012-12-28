@@ -1,7 +1,9 @@
 package com.sparkmedia.van.advertising.action;
 
+import com.sparkmedia.van.advertising.utils.ProptUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -9,10 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-
-import com.sparkmedia.van.advertising.utils.ProptUtils;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,13 +38,33 @@ public class FileUpload extends HttpServlet {
                 // Create a new file upload handler
                 ServletFileUpload upload = new ServletFileUpload(factory);
 
+                // binding a process listener
+                ProgressListener progressListener = new ProgressListener(){
+                    private long megaBytes = -1;
+                    public void update(long pBytesRead, long pContentLength, int pItems) {
+                        long mBytes = pBytesRead / 1000000;
+                        if (megaBytes == mBytes) {
+                            return;
+                        }
+                        megaBytes = mBytes;
+                        System.out.println("We are currently reading item " + pItems);
+                        if (pContentLength == -1) {
+                            System.out.println("So far, " + pBytesRead + " bytes have been read.");
+                        } else {
+                            System.out.println("So far, " + pBytesRead + " of " + pContentLength
+                                    + " bytes have been read.");
+                        }
+                    }
+                };
+                upload.setProgressListener(progressListener);
+
                 // Parse the request
                 List<FileItem> paramItems = upload.parseRequest(request);
 
                 for (FileItem item : paramItems) {
                     if (!item.isFormField() && item.getSize() > 0) {
-                        if (item.getSize() > 200 * 1024) {
-                            throw new Exception("The " + item.getName() + " file is too big(must <= 20k)!");
+                        if (item.getSize() > 2000 * 1024) {
+                            throw new Exception("The " + item.getName() + " file is too big(must <= 200k)!");
                         }
 
                         File uploadedFile = new File(uploadPath + "/" + item.getName());
