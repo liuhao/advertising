@@ -44,6 +44,23 @@
         <realm-name>Intranet</realm-name>
     </login-config>
 
+    <filter>
+        <filter-name>Authenticate</filter-name>
+        <filter-class>com.sparkmedia.van.advertising.action.AuthenticateFilter</filter-class>
+        <init-param>
+            <param-name>startTime</param-name>
+            <param-value>2</param-value>
+        </init-param>
+        <init-param>
+            <param-name>endTime</param-name>
+            <param-value>10</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authenticate</filter-name>
+        <servlet-name>FileUpload</servlet-name>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>ShowAdTypes</servlet-name>
         <servlet-class>com.sparkmedia.van.advertising.action.ShowAdSiteTypes</servlet-class>
