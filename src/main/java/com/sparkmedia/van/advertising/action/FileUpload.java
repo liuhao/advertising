@@ -23,8 +23,6 @@ import java.util.List;
  * receive upload file, store it in the defined path.
  */
 public class FileUpload extends HttpServlet {
-    public static ProptUtils props = new ProptUtils();
-
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);

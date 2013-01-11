@@ -3,7 +3,6 @@ package com.sparkmedia.van.advertising.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.Properties;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,14 +12,15 @@ import java.util.Properties;
  * Create a connection with derby, create tables structure.
  */
 public class DBConnectionUtils {
-
-    public static Properties props = new Properties();
+    private static String dbCreate = ProptUtils.get("create");
+    private static String dbUser = ProptUtils.get("user");
+    private static String dbPassword = ProptUtils.get("password");
+    private static String dbLocation = ProptUtils.get("db_location");
 
     static {
         try {
-            props.load(DBConnectionUtils.class.getClassLoader().getResourceAsStream("config.properties"));
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-            if (props.getProperty("create").toString().endsWith("true")) {
+            if (dbCreate.endsWith("true")) {
                 createTb();
             }
         } catch (Exception e) {
@@ -30,8 +30,7 @@ public class DBConnectionUtils {
 
     public static Connection getConnection() throws Exception {
         //create and connect the database
-        return DriverManager.getConnection("jdbc:derby:" + props.getProperty("db_location")
-                + ";create=" + props.getProperty("create"), props);
+        return DriverManager.getConnection("jdbc:derby:" + dbLocation + ";create=" + dbCreate, dbUser, dbPassword);
     }
 
     public static void createTb() throws Exception {
