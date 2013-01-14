@@ -31,7 +31,7 @@
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
-            <form-login-page>/login.jsp</form-login-page>
+            <form-loglin-page>/login.jsp</form-ogin-page>
             <form-error-page>/WEB-INF/pages/Error.jsp</form-error-page>
         </form-login-config>
     </login-config>
@@ -44,6 +44,7 @@
         <realm-name>Intranet</realm-name>
     </login-config>
 
+    <!-- Deploy filter. -->
     <filter>
         <filter-name>Authenticate</filter-name>
         <filter-class>com.sparkmedia.van.advertising.action.AuthenticateFilter</filter-class>
@@ -60,7 +61,13 @@
         <filter-name>Authenticate</filter-name>
         <servlet-name>FileUpload</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authenticate</filter-name>
+        <url-pattern>/WEB-INF/pages/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 
+    <!-- Deploy servlet -->
     <servlet>
         <servlet-name>ShowAdTypes</servlet-name>
         <servlet-class>com.sparkmedia.van.advertising.action.ShowAdSiteTypes</servlet-class>

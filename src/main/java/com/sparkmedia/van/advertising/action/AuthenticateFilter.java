@@ -1,9 +1,10 @@
 package com.sparkmedia.van.advertising.action;
 
+import sun.misc.BASE64Decoder;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,9 +22,26 @@ public class AuthenticateFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest)request;
-        if ( startTime < endTime ) {
-            context.log(filterName + " >>> " + req.getRemoteHost() + " tried to access " + req.getRequestURL() +
-                    " on " + new Date() + ".");
+        String authorization = req.getHeader("Authorization");
+        if (authorization == null) {
+            askForPassword(response);
+        } else {
+            // Authorization headers looks like "Basic blahblah",
+            // where blahblah is the base64 encoded username and
+            // password. We want the part after "Basic ".
+            String userInfo = authorization.substring(6).trim();
+            BASE64Decoder decoder = new BASE64Decoder();
+            String nameAndPassword = new String(decoder.decodeBuffer(userInfo));
+            // Decoded part looks like "username:password".
+            int index = nameAndPassword.indexOf(":");
+            String user = nameAndPassword.substring(0, index);
+            String password = nameAndPassword.substring(index+1);
+            // High security: username must be reverse of password.
+            if (areEqualReversed(user, password)) {
+                showStock(request, response);
+            } else {
+                askForPassword(response);
+            }
         }
         chain.doFilter(request,response);
     }
