@@ -3,28 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
-    <security-role>
-        <role-name>test</role-name>
-    </security-role>
-    <security-role>
-        <role-name>user</role-name>
-    </security-role>
-
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Sensitive</web-resource-name>
-            <url-pattern>/upload.jsp</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
+    <!--
+        <security-role>
             <role-name>test</role-name>
+        </security-role>
+        <security-role>
             <role-name>user</role-name>
-        </auth-constraint>
-<!--
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
--->
-    </security-constraint>
+        </security-role>
+
+        <security-constraint>
+            <web-resource-collection>
+                <web-resource-name>Sensitive</web-resource-name>
+                <url-pattern>/upload.jsp</url-pattern>
+            </web-resource-collection>
+            <auth-constraint>
+                <role-name>test</role-name>
+                <role-name>user</role-name>
+            </auth-constraint>
+
+            <user-data-constraint>
+                <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+            </user-data-constraint>
+
+        </security-constraint>
+    -->
 
     <!-- Tell the server to use FORM authentication.
 
@@ -65,6 +67,7 @@
         <filter-name>Authenticate</filter-name>
         <url-pattern>/WEB-INF/pages/*</url-pattern>
         <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
     <!-- Deploy servlet -->
