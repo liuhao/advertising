@@ -5,7 +5,7 @@ package com.sparkmedia.van.advertising.action;
  * User: D06LH
  * Date: 12-10-17
  * Time: 下午3:36
- * To change this template use File | Settings | File Templates.
+ * Output a xml file to STB which include all of the advertising resource url.
  */
 public class AdListOutput {
 }
