@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: D06LH
   Date: 12-10-31
-  Time: 下午3:52
+  Time: 15:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -102,7 +102,7 @@
 </div>
 <div id="overlay" class="web_dialog_overlay"></div>
 <div id="dialog" class="web_dialog">
-    <table style="width: 100%; border: 0;" cellpadding="3" cellspacing="0">
+    <table style="width: 100%; border: 0;">
         <tr>
             <td class="web_dialog_title">Add New AdSite Recorder</td>
             <td class="web_dialog_title align_right">
@@ -200,10 +200,8 @@
 <form method="post" action="/AddAdSiteType">
     <input type="submit" value="Add New AdSiteType">
 </form>
-<%--
-<jsp:useBean id="Page" type="com.sparkmedia.van.advertising.utils.Page" scope="session"/>
---%>
 
+<jsp:useBean id="Page" type="com.sparkmedia.van.advertising.utils.Page" scope="session"/>
 page.totalRecordes = ${Page.totalRecords}
 page.curPage = ${Page.curPage}
 page.pageCount = ${Page.pageCount}

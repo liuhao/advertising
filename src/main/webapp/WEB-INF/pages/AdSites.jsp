@@ -7,36 +7,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title></title>
+    <title> AdSite List </title>
 </head>
 <body>
-<jsp:useBean id="Page" type="com.sparkmedia.van.advertising.utils.Page" scope="session"/>
-page.totalRecordes = ${Page.totalRecords}
-page.curPage = ${Page.curPage}
-page.pageCount = ${Page.pageCount}
-<table border="1">
-    <tr>
-        <td>${Page.results[0].id}</td>
-        <td>${Page.results[0].adContents[1].name}</td>
-    </tr>
-</table>
 
-<table>
-    <tr>
-        <td>id</td>
-        <td>adContents</td>
-    </tr>
-    <%
-        List<AdSite> adSiteList = Page.getResults();
-        for (AdSite adSite : adSiteList) {
-            out.println("<tr><td>" + adSite.getId() + "</td>");
-            out.println("<td>" + adSite.getAdContents().size() + "</td></tr>");
-        }
-
-    %>
-</table>
+<div id="list">
+    <table>
+        <c:forEach var="item" items="${Page.results}">
+            <tr>
+                <td>${item.id}</td>
+                <td>
+                    <table>
+                        <c:forEach var="content" items="${item.adContents}">
+                            <tr>
+                                <td>x:${content.name}</td>
+                                <td>y:${content.uri}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 
 </body>
 </html>
