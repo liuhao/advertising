@@ -83,6 +83,10 @@
         <servlet-name>FileUpload</servlet-name>
         <servlet-class>com.sparkmedia.van.advertising.action.FileUpload</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OperatorLogin</servlet-name>
+        <servlet-class>com.sparkmedia.van.advertising.action.OperatorLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShowAdTypes</servlet-name>
         <url-pattern>/show_ad_type</url-pattern>
@@ -95,8 +99,12 @@
         <servlet-name>FileUpload</servlet-name>
         <url-pattern>/file_upload</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OperatorLogin</servlet-name>
+        <url-pattern>/operator_login</url-pattern>
+    </servlet-mapping>
     <display-name>Sparkmedia Advertising Operating Server</display-name>
     <welcome-file-list>
-        <welcome-file>upload.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

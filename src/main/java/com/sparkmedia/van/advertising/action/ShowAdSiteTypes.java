@@ -19,7 +19,7 @@ import java.io.IOException;
  * User: D06LH
  * Date: 12-10-17
  * Time: 下午3:31
- * Servlet list the recorder of the advertising site.
+ * Servlet list the recorders of the advertising site.
  */
 public class ShowAdSiteTypes extends HttpServlet {
     private IAdSiteTypesDao adSiteTypesDao = new AdSiteTypesDao();
