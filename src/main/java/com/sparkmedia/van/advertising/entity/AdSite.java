@@ -1,5 +1,6 @@
 package com.sparkmedia.van.advertising.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,10 +14,11 @@ import java.util.List;
  */
 public class AdSite {
     private long id;
-    private long typeId;
-    private List<AdContent> adContents;
+    private long layerId;
+    private long boxId;
+    private String uri;
     private int stat;
-    private Date updateDate;
+    private String updateDate;
 
     private static final long serialVersionUID = 7312438658961498567L;
 
@@ -28,20 +30,28 @@ public class AdSite {
         this.id = id;
     }
 
-    public long getTypeId() {
-        return typeId;
+    public long getLayerId() {
+        return layerId;
     }
 
-    public void setTypeId(long typeId) {
-        this.typeId = typeId;
+    public void setLayerId(long layerId) {
+        this.layerId = layerId;
     }
 
-    public List<AdContent> getAdContents() {
-        return adContents;
+    public long getBoxId() {
+        return boxId;
     }
 
-    public void setAdContents(List<AdContent> adContents) {
-        this.adContents = adContents;
+    public void setBoxId(long boxId) {
+        this.boxId = boxId;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public int getStat() {
@@ -52,11 +62,11 @@ public class AdSite {
         this.stat = stat;
     }
 
-    public Date getUpdateDate() {
+    public String getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
 }

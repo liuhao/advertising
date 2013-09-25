@@ -1,8 +1,8 @@
 package com.sparkmedia.van.advertising.action;
 
-import com.sparkmedia.van.advertising.dao.IAdSiteTypesDao;
-import com.sparkmedia.van.advertising.dao.impl.AdSiteTypesDao;
-import com.sparkmedia.van.advertising.entity.AdSiteType;
+import com.sparkmedia.van.advertising.dao.IAdLayerDao;
+import com.sparkmedia.van.advertising.dao.impl.AdLayerDao;
+import com.sparkmedia.van.advertising.entity.AdLayer;
 import com.sparkmedia.van.advertising.utils.BeanUtilities;
 import com.sparkmedia.van.advertising.utils.Page;
 
@@ -22,12 +22,12 @@ import java.io.IOException;
  * Servlet list the recorders of the advertising site.
  */
 public class ShowAdSiteTypes extends HttpServlet {
-    private IAdSiteTypesDao adSiteTypesDao = new AdSiteTypesDao();
+    private IAdLayerDao adSiteTypesDao = new AdLayerDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Page<AdSiteType> page = (Page<AdSiteType>) session.getAttribute("Page");
+        Page<AdLayer> page = (Page<AdLayer>) session.getAttribute("Page");
         ShowAdSitesFormBean beanShow = new ShowAdSitesFormBean();
         String address;
         BeanUtilities.populateBean(beanShow, request);
@@ -36,7 +36,7 @@ public class ShowAdSiteTypes extends HttpServlet {
                 page = adSiteTypesDao.query(beanShow.getCurPage(), beanShow.getPageSize());
                 session.setAttribute("Page", page);
             }
-            address = "/WEB-INF/pages/AdSiteTypes.jsp";
+            address = "/WEB-INF/pages/AdLayers.jsp";
         } catch (Exception e) {
             address = "/WEB-INF/pages/Error.jsp";
         }

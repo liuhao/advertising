@@ -5,40 +5,31 @@ package com.sparkmedia.van.advertising.entity;
  * User: D06LH
  * Date: 12-10-17
  * Time: 下午2:59
- * AdContent represent the material of the advertising,
+ * AdBox represent the advertising block of the view window,
  * for example: a picture, a video clip or a flash file.
  */
-public class AdContent {
-    private String name;
-    private String description;
+public class AdBox {
+    private long id;
+    private String type;
     private Integer x;
     private Integer y;
     private Integer w;
     private Integer h;
-    private String uri;
 
-    public String getName() {
-        return name;
+    public long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getType() {
+        return type;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getX() {

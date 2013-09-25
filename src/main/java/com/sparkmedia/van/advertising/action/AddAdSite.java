@@ -1,7 +1,7 @@
 package com.sparkmedia.van.advertising.action;
 
-import com.sparkmedia.van.advertising.dao.IAdSitesDao;
-import com.sparkmedia.van.advertising.dao.impl.AdSitesDao;
+import com.sparkmedia.van.advertising.dao.IAdSiteDao;
+import com.sparkmedia.van.advertising.dao.impl.AdSiteDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +18,7 @@ import java.io.IOException;
  * Add AdSite recorder to table.
  */
 public class AddAdSite extends HttpServlet {
-    private IAdSitesDao adSiteTypesDao = new AdSitesDao();
+    private IAdSiteDao adSiteTypesDao = new AdSiteDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

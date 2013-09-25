@@ -1,7 +1,7 @@
 package com.sparkmedia.van.advertising.action;
 
-import com.sparkmedia.van.advertising.dao.IAdSitesDao;
-import com.sparkmedia.van.advertising.dao.impl.AdSitesDao;
+import com.sparkmedia.van.advertising.dao.IAdSiteDao;
+import com.sparkmedia.van.advertising.dao.impl.AdSiteDao;
 import com.sparkmedia.van.advertising.entity.AdSite;
 import com.sparkmedia.van.advertising.utils.*;
 
@@ -21,7 +21,7 @@ import java.io.IOException;
  * Servlet list the recorder of the advertising site.
  */
 public class ShowAdSites extends HttpServlet {
-    private IAdSitesDao advSiteDao = new AdSitesDao();
+    private IAdSiteDao adSiteDao = new AdSiteDao();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,7 +30,8 @@ public class ShowAdSites extends HttpServlet {
         BeanUtilities.populateBean(beanShow, request);
         String address;
         try {
-            Page<AdSite> page = advSiteDao.query(beanShow.getCurPage(), beanShow.getPageSize(), beanShow.getTypeId());
+            Page<AdSite> page = adSiteDao.query(beanShow.getCurPage(), beanShow.getPageSize(),
+                    beanShow.getLayerId(), beanShow.getBoxId());
             session.setAttribute("Page", page);
             address = "/WEB-INF/pages/AdSites.jsp";
         } catch (Exception e) {

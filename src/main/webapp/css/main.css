@@ -1,7 +1,7 @@
 body {font-family: Verdana, sans-serif;}
 
 p > em {font-weight: bold;}
-#category {float: right; width: 200px; margin-top: 0px; background: #A5D3DE;}
+#category {float: left; width: 200px; margin-top: 0px; background: #A5D3DE;}
 
 
 /* styles for navigation */

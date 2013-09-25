@@ -10,7 +10,8 @@ package com.sparkmedia.van.advertising.action;
 public class ShowAdSitesFormBean {
     private int curPage = 1;
     private int pageSize = 20;
-    private long typeId = 0;
+    private long layerId = 0;
+    private long boxId = 0;
 
     public int getCurPage() {
         return curPage;
@@ -28,11 +29,18 @@ public class ShowAdSitesFormBean {
         this.pageSize = pageSize;
     }
 
-    public long getTypeId() {
-        return typeId;
+    public long getLayerId() {
+        return layerId;
     }
 
-    public void setTypeId(long typeId) {
-        this.typeId = typeId;
+    public void setLayerId(long layerId) {
+        this.layerId = layerId;
+    }
+
+    public long getBoxId() {
+        return boxId;
+    }
+    public void setBoxId(long boxId) {
+        this.boxId = boxId;
     }
 }

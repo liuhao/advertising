@@ -84,7 +84,7 @@
                 <td>${item.id}</td>
                 <td>
                     <table>
-                        <c:forEach var="content" items="${item.adContents}">
+                        <c:forEach var="content" items="${item.adBlocks}">
                             <tr>
                                 <td>x:${content.x}</td>
                                 <td>y:${content.y}</td>
@@ -134,7 +134,7 @@
         <tr>
             <td colspan="2" style="padding-left: 15px;">
                 <div id="recordData">
-                    Type Name:<input id="inputText" name="typeName" type="text" value="YouTube"/>
+                    Type Name:<input id="inputText" name="layerName" type="text" value="YouTube"/>
                     Content List:
                 </div>
             </td>
@@ -208,7 +208,7 @@ page.pageCount = ${Page.pageCount}
 <table border="1">
     <tr>
         <td>${Page.results[0].id}</td>
-        <td>${Page.results[0].adContents[1].name}</td>
+        <td>${Page.results[0].adBlocks[1].name}</td>
     </tr>
 </table>
 
@@ -217,13 +217,13 @@ page.pageCount = ${Page.pageCount}
 <table>
     <tr>
         <td>id</td>
-        <td>adContents</td>
+        <td>adBlocks</td>
     </tr>
     <%
-        List<AdSiteType> adSiteTypeList = Page.getResults();
-        for (AdSiteType adSiteType : adSiteTypeList) {
-            out.println("<tr><td>" + adSiteType.getId() + "</td>");
-            out.println("<td>" + adSiteType.getAdContents().size() + "</td></tr>");
+        List<AdLayer> adSiteTypeList = Page.getResults();
+        for (AdLayer adLayer : adSiteTypeList) {
+            out.println("<tr><td>" + adLayer.getId() + "</td>");
+            out.println("<td>" + adLayer.getAdBlocks().size() + "</td></tr>");
         }
 
     %>

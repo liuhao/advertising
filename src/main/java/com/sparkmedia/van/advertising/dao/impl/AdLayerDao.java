@@ -1,8 +1,8 @@
 package com.sparkmedia.van.advertising.dao.impl;
 
-import com.sparkmedia.van.advertising.dao.IAdSiteTypesDao;
-import com.sparkmedia.van.advertising.entity.AdContent;
-import com.sparkmedia.van.advertising.entity.AdSiteType;
+import com.sparkmedia.van.advertising.dao.IAdLayerDao;
+import com.sparkmedia.van.advertising.entity.AdBox;
+import com.sparkmedia.van.advertising.entity.AdLayer;
 import com.sparkmedia.van.advertising.utils.DBConnectionUtils;
 import com.sparkmedia.van.advertising.utils.Page;
 
@@ -20,24 +20,23 @@ import java.util.List;
  * User: D06LH
  * Date: 12-10-19
  * Time: 下午2:15
- * Transfer AdSiteType obj to json obj, then use json obj handle database recorder.
+ * Transfer AdLayer obj to json obj, then use json obj handle database recorder.
  */
-public class AdSiteTypesDao implements IAdSiteTypesDao {
+public class AdLayerDao implements IAdLayerDao {
 
     @Override
-    public void insert(AdSiteType adSiteType) throws Exception {
+    public void insert(AdLayer adLayer) throws Exception {
         Connection conn = null;
         try {
             conn = DBConnectionUtils.getConnection();
             conn.setAutoCommit(false);
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO AdSiteTypeTable (typeName, adContents) VALUES (?,?)");
-            ps.setString(1, adSiteType.getTypeName());
-            Gson gson = new Gson();
-            ps.setString(2, gson.toJson(adSiteType.getAdContents()));
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO AdLayerTable (layerName, adBoxIds) VALUES (?,?)");
+            ps.setString(1, adLayer.getLayerName());
+            ps.setString(2, adLayer.getAdBoxIds().toString());
             ps.executeUpdate();
             conn.commit();
         } catch (Exception e) {
-            System.out.println("adSiteType INSERT is false");
+            System.out.println("adLayer INSERT is false");
             conn.rollback();
             throw e;
         }finally{
@@ -47,13 +46,13 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
     }
 
     @Override
-    public int delete(long adSiteTypeId) throws Exception {
+    public int delete(long adLayerId) throws Exception {
         Connection conn = null;
         int count = 0;
         try {
             conn = DBConnectionUtils.getConnection();
             conn.setAutoCommit(false);
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM AdSiteTypeTable WHERE id in ("+adSiteTypeId+")");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM AdLayerTable WHERE id in ("+adLayerId+")");
             count = ps.executeUpdate();
             conn.commit();
         } catch (Exception e) {
@@ -67,23 +66,23 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
     }
 
     @Override
-    public AdSiteType get(long adSiteTypeId) throws Exception {
+    public AdLayer get(long adLayerId) throws Exception {
         Connection conn = null;
-        AdSiteType adSiteType = null;
+        AdLayer adLayer = null;
         try {
             conn = DBConnectionUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM AdSiteTypeTable WHERE id=?");
-            ps.setLong(1, adSiteTypeId);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM AdLayerTable WHERE id=?");
+            ps.setLong(1, adLayerId);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                adSiteType = new AdSiteType();
-                adSiteType.setTypeName(rs.getString("typeName"));
+                adLayer = new AdLayer();
+                adLayer.setLayerName(rs.getString("layerName"));
                 Gson gson = new Gson();
-                Type collectionType = new TypeToken<List<AdContent>>(){}.getType();
-                List<AdContent> contents = gson.fromJson(rs.getString("adContents"), collectionType);
-                adSiteType.setAdContents(contents);
+                Type collectionType = new TypeToken<List<Long>>(){}.getType();
+                List<Long> boxIds = gson.fromJson(rs.getString("boxIds"), collectionType);
+                adLayer.setAdBoxIds(boxIds);
             }
-            return adSiteType;
+            return adLayer;
         } catch (Exception e) {
             throw new Exception(e);
         }finally{
@@ -93,12 +92,12 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
     }
 
     @Override
-    public Page<AdSiteType> query(int curPage, int pageSize) throws Exception {
+    public Page<AdLayer> query(int curPage, int pageSize) throws Exception {
         Connection conn = null;
-        Page<AdSiteType> page = new Page<AdSiteType>();
+        Page<AdLayer> page = new Page<AdLayer>();
         try {
             conn = DBConnectionUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM AdSiteTypeTable");
+            PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM AdLayerTable");
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 System.out.println("rs.next() is ture");
@@ -108,25 +107,25 @@ public class AdSiteTypesDao implements IAdSiteTypesDao {
                 }
             }
             System.out.println("rs.next() is false");
-            ps = conn.prepareStatement("SELECT * FROM AdSiteTypeTable ORDER BY id DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps = conn.prepareStatement("SELECT * FROM AdLayerTable ORDER BY id DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, (curPage-1)*pageSize);
             ps.setInt(2, pageSize);
             rs = ps.executeQuery();
 
             // transfer Result Set to Result List
-            List<AdSiteType> results = new ArrayList<AdSiteType>();
+            List<AdLayer> results = new ArrayList<AdLayer>();
             page.setResults(results);
             page.setCurPage(curPage);
-            AdSiteType adSiteType;
+            AdLayer adLayer;
             Gson gson = new Gson();
-            Type collectionType = new TypeToken<List<AdContent>>(){}.getType();
+            Type collectionType = new TypeToken<List<Long>>(){}.getType();
             while(rs.next()){
-                adSiteType = new AdSiteType();
-                adSiteType.setId(rs.getLong("id"));
-                adSiteType.setTypeName(rs.getString("typeName"));
-                List<AdContent> contents = gson.fromJson(rs.getString("adContents"), collectionType);
-                adSiteType.setAdContents(contents);
-                results.add(adSiteType);
+                adLayer = new AdLayer();
+                adLayer.setId(rs.getLong("id"));
+                adLayer.setLayerName(rs.getString("typeName"));
+                List<Long> contents = gson.fromJson(rs.getString("boxIds"), collectionType);
+                adLayer.setAdBoxIds(contents);
+                results.add(adLayer);
             }
         } catch (Exception e) {
             throw new Exception(e);

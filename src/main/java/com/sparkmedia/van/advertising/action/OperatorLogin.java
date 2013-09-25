@@ -33,7 +33,7 @@ public class OperatorLogin extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("Authorization", "yes");
                 // redirect to main page.
-                response.sendRedirect("/show_ad_type");
+                response.sendRedirect("/show_ad_sites");
             } else {
                 // stay at login page.
                 askForPassword(response);

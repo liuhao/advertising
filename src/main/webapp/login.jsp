@@ -26,7 +26,7 @@
     response.setDateHeader("Expires", -1);
     // Check if user is already logged in
     if (request.getSession().getAttribute("Authorization") != null) {
-        response.sendRedirect("upload.jsp");
+        response.sendRedirect("/show_ad_sites");
     }
 %>
 <!DOCTYPE html>

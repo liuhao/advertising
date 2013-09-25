@@ -28,28 +28,3 @@
         </ul>
     </nav>
 </header>
-
-<section>
-    <nav id="category">
-        <ul>
-            <li>YouTube</li>
-            <li>EPG Info</li>
-            <li>Radio</li>
-        </ul>
-    </nav>
-    <div id="">
-        <table></table>
-    </div>
-
-    <p>Note Although there is <em>no way to hover a finger</em> over an element, <a href="">iOS <em>Safari</em> and some
-        Android devices</a> may display the :hover state styles after</p>
-</section>
-
-<footer>
-    <p>
-        <small>Copyright &copy;2013 d06lh.</small>
-    </p>
-</footer>
-
-</body>
-</html>
